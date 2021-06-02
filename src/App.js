@@ -61,6 +61,19 @@ function App() {
     }, 3000);
   }
 
+  const clearItems = () => {
+    setExpenses([]);
+    handleAlert({ type: 'danger', text: 'All items deleted' });
+  }
+  const handleDelete = (id) => {
+    let tempExpenses = expenses.filter(item => item.id !== id);
+    setExpenses(tempExpenses);
+    handleAlert({ type: 'danger', text: 'Item deleted successfully' });
+  }
+  const handleEdit = (id) => {
+    
+  }
+
   return <>
     { alert.show && <Alert type={alert.type} text={alert.text} /> }
     <Alert />
@@ -73,7 +86,12 @@ function App() {
         handleAmount={handleAmount}
         handleSubmit={handleSubmit}
       />
-      <ExpenseList expenses={expenses} />
+      <ExpenseList 
+        expenses={expenses}
+        handleDelete={handleDelete}
+        handleEdit={handleEdit}
+        clearItems={clearItems}
+      />
     </main>
     <h1>
       total spending: <span className="total">$ { expenses.reduce((acc, cur) => { return acc += parseInt(cur.amount)}, 0) }</span>
