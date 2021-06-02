@@ -37,13 +37,24 @@ function App() {
   const handleSubmit = e => {
     e.preventDefault();
     if(charge !== '' && amount > 0) {
-      const singleExpense = {
-        id: uuidv4(),
-        charge: charge,
-        amount: amount
-      };
+      if(edit) {
+        let tempExpenses = expenses.map(item => {
+          return item.id === id? {...item, charge: charge, amount: amount} : item;
+        });
 
-      setExpenses([...expenses, singleExpense]);
+        setExpenses(tempExpenses);
+        setEdit(false);
+        handleAlert({ type: 'success', text: 'Item edited successfully!' });
+      } else {
+        const singleExpense = {
+          id: uuidv4(),
+          charge: charge,
+          amount: amount
+        };
+  
+        setExpenses([...expenses, singleExpense]);
+      }
+      
       setCharge('');
       setAmount('');
 
@@ -70,8 +81,16 @@ function App() {
     setExpenses(tempExpenses);
     handleAlert({ type: 'danger', text: 'Item deleted successfully' });
   }
+
+  const [edit, setEdit] = useState(false);
+  const [id, setId] = useState(0);
   const handleEdit = (id) => {
-    
+    let expense = expenses.find(item => item.id === id);
+    let { charge, amount } = expense;
+    setCharge(charge);
+    setAmount(amount);
+    setEdit(true);
+    setId(id);
   }
 
   return <>
@@ -85,6 +104,7 @@ function App() {
         handleCharge={handleCharge}
         handleAmount={handleAmount}
         handleSubmit={handleSubmit}
+        edit={edit}
       />
       <ExpenseList 
         expenses={expenses}
