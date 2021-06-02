@@ -46,12 +46,23 @@ function App() {
       setExpenses([...expenses, singleExpense]);
       setCharge('');
       setAmount('');
-    } else {
 
+      handleAlert({ type: 'success', text: 'Item added successfully!' });
+    } else {
+      handleAlert({ type: 'danger', text: 'Invalid inputs were entered' });
     }
   }
 
+  const [alert, setAlert] = useState({ show: false });
+  const handleAlert = ({ type, text }) => {
+    setAlert({ show: true, type, text });
+    setTimeout(() => {
+      setAlert({ show: false });
+    }, 3000);
+  }
+
   return <>
+    { alert.show && <Alert type={alert.type} text={alert.text} /> }
     <Alert />
     <h1>Budget Calculator</h1>
     <main className="App">
