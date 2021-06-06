@@ -6,7 +6,7 @@ const ExpenseForm = ({ charge, amount, handleCharge, handleAmount, handleSubmit,
         <form onSubmit={handleSubmit}>
             <div className="form-center">
                 <div className="form-group">
-                    <label for="charge">Charge</label>
+                    <label htmlFor="charge">Charge</label>
                     <input 
                         className="form-control" 
                         id="charge" 
@@ -19,7 +19,7 @@ const ExpenseForm = ({ charge, amount, handleCharge, handleAmount, handleSubmit,
                 </div>
 
                 <div className="form-group">
-                    <label for="amount">Amount</label>
+                    <label htmlFor="amount">Amount</label>
                     <input 
                         className="form-control" 
                         id="amount" 
