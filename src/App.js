@@ -5,7 +5,6 @@ import Alert from './components/Alert';
 import { v4 as uuidv4 } from 'uuid';
 import './App.css';
 
-/*
 const initialExpenses = [
   {
     id: uuidv4(),
@@ -23,7 +22,6 @@ const initialExpenses = [
     amount: 1200
   }
 ];
-*/
 
 const initialExpenses = localStorage.getItem('expenses')? JSON.parse(localStorage.getItem('expenses')) : [];
 
